@@ -1,52 +1,117 @@
-# resourse-management-
-# 🔧 Resource Management API
+# 🚀 Resource Management API
 
-A lightweight Python Flask API to log, manage, and retrieve user-specific resource access data with automatic TTL-based expiration.
-
----
-
-## 📌 Features
-
-- ✅ Log a resource access by a specific user ID
-- ⏳ Automatically expire logs after a given time-to-live (TTL)
-- 🔍 Retrieve all non-expired logs for a user
-- 🕒 Retrieve all resources logged at a specific timestamp
-- 🧹 Manually trigger cleanup of expired logs
-- 📦 Easily extendable for database or scheduler support
+A Flask-based backend application for managing and logging resources by users with features like automatic expiration (TTL), retrieval by user ID or timestamp, and persistent storage using SQLite.
 
 ---
 
-## 🚀 Tech Stack
+## 🔧 Features
 
-- **Language:** Python 3.x  
-- **Framework:** Flask  
-- **Data Store:** In-memory (list)  
-- **Tools:** `time` module for TTL, `curl`/Postman for API testing
+- ✅ Log resources with a TTL (Time-to-Live) mechanism
+- ✅ Retrieve resources by user ID or timestamp
+- ✅ Automatically clean up expired logs
+- ✅ Persistent storage using SQLite
+- ✅ `.env` support for configurations
+- ✅ Docker support (Optional)
+- ✅ Basic unit testing
 
 ---
 
-## ⚙️ Setup Instructions
+## 📦 Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/resource-management-api.git
-   cd resource-management-api
-2.Install dependencies:
-pip install flask
+### 🔹 Clone the repository
 
-3.Run the application:
-python resource_logger.py
+```bash
+git clone https://github.com/Khushi-Dixit/resourse-management-.git
+cd resourse-management-
+```
 
+### 🔹 Create a virtual environment and activate
 
-🌱 Future Enhancements
-🗃️ Integrate SQLite / MongoDB as persistent backend
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+```
 
-🔐 Add JWT authentication and API key management
+### 🔹 Install dependencies
 
-📅 Schedule auto-cleanup using APScheduler
+```bash
+pip install -r requirements.txt
+```
 
-📊 Add admin dashboard to visualize logs
+---
 
-📦 Dockerize the project for deployment
+## ⚙️ Configuration (.env)
 
+Create a `.env` file in the root directory and include the following:
 
+```env
+TTL_SECONDS=600
+DATABASE_URI=sqlite:///resources.db
+FLASK_ENV=development
+```
+
+---
+
+## ▶️ Running the App
+
+```bash
+python run.py
+```
+
+The app will start at `http://127.0.0.1:5000/`
+
+---
+
+## 🌐 API Endpoints
+
+| Method | Endpoint                  | Description                                |
+|--------|---------------------------|--------------------------------------------|
+| POST   | `/log_resource`           | Log a new resource with TTL                |
+| GET    | `/get_resources/<user_id>`| Get all resources for a specific user ID   |
+| GET    | `/get_all_resources`      | Get all currently active resources         |
+| GET    | `/get_by_time/<timestamp>`| Get all resources logged at a timestamp    |
+
+---
+
+## 📁 Folder Structure
+
+```
+resourse-management-/
+├── app/
+│   ├── __init__.py
+│   ├── models.py
+│   ├── routes.py
+│   └── utils.py
+├── tests/
+│   └── test_routes.py
+├── .env
+├── requirements.txt
+├── Dockerfile
+├── README.md
+└── run.py
+```
+
+---
+
+## 🧪 To Run Tests (if added)
+
+```bash
+pytest tests/
+```
+
+---
+
+## 🐳 Docker (Optional)
+
+To build and run using Docker:
+
+```bash
+docker build -t resource-api .
+docker run -p 5000:5000 resource-api
+```
+
+---
+
+## ✨ Author
+
+Created by **Khushi Dixit** – [GitHub](https://github.com/Khushi-Dixit)
